@@ -1,4 +1,5 @@
 import React from "react";
+import Loadable  from "react-loadable"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -17,40 +18,31 @@ import "bootstrap/dist/js/bootstrap.js";
 import ModeContextProvider from "./contexts/modeContext";
 
 // Auth
-const SignUp = React.lazy(() => import("./components/auth/SignUp"));
-const SignIn = React.lazy(() => import("./components/auth/SignIn"));
+const SignUp = Loadable({loader : () => import("./components/auth/SignUp"), loading : () => <Loader /> });
+const SignIn = Loadable({loader : () => import("./components/auth/SignIn"), loading : () => <Loader /> });
 
 // Article page
-const selectedArticle = React.lazy(() =>
-  import("./components/learn/articles/SelectedArticle")
-);
-const PreviewPage = React.lazy(() =>
-  import("./components/learn/preview/PreviewPage")
-);
+const selectedArticle = Loadable({
+
+  loader : () => import("./components/learn/articles/SelectedArticle"), 
+  loading : () => <Loader /> 
+});
+const PreviewPage = Loadable({
+  loader: () => import("./components/learn/preview/PreviewPage"),
+  loading: () => <Loader />
+});
 
 // Components
-const Home = React.lazy(() => import("./components/home/home"));
-const About = React.lazy(() => import("./components/aboutUs/about"));
-const Learn = React.lazy(() => import("./components/learn/learn"));
+const Home = Loadable({loader : () => import("./components/home/home"), loading : () => <Loader /> });
+const About = Loadable({loader : () => import("./components/aboutUs/about"), loading : () => <Loader /> });
+const Learn = Loadable({loader : () => import("./components/learn/learn"), loading : () => <Loader /> });
 
-const EditHomepage = React.lazy(() =>
-  import("./components/home/EDIT/editHomepage")
-);
-const EditCard = React.lazy(() =>
-  import("./components/learn/learningCards/UpdateCard")
-);
-const AddCard = React.lazy(() =>
-  import("./components/learn/learningCards/AddCard")
-);
-const AddArticle = React.lazy(() =>
-  import("./components/learn/articles/addArticle")
-);
-const UpdateArticle = React.lazy(() =>
-  import("./components/learn/articles/updateArticle")
-);
-const AdminPanel = React.lazy(() =>
-  import("./components/adminPanel/adminPanel")
-);
+const EditHomepage = Loadable({loader : () => import("./components/home/EDIT/editHomepage"), loading : () => <Loader /> }); 
+const EditCard = Loadable({loader : () => import("./components/learn/learningCards/UpdateCard"), loading : () => <Loader /> }); 
+const AddCard = Loadable({loader : () => import("./components/learn/learningCards/AddCard"), loading : () => <Loader /> });
+const AddArticle = Loadable({loader : () => import("./components/learn/articles/addArticle"), loading : () => <Loader /> });
+const UpdateArticle = Loadable({loader : () => import("./components/learn/articles/updateArticle"), loading : () => <Loader /> });
+const AdminPanel = Loadable({loader : () => import("./components/adminPanel/adminPanel"), loading : () => <Loader /> });
 
 const App = () => {
   return (
@@ -65,7 +57,6 @@ const App = () => {
                     <Navbar />
                     <AnimatePresence>
                       <Switch>
-                        <React.Suspense fallback={<Loader />}>
                           <Route exact path="/" component={Home} />
                           <Route path="/about" component={About} />
                           <Route exact path="/learn" component={Learn} />
@@ -117,7 +108,6 @@ const App = () => {
                             path="/completeProfile"
                             component={CompleteProfile}
                           />
-                        </React.Suspense>
                       </Switch>
                     </AnimatePresence>
                   </ModeContextProvider>

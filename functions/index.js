@@ -1,3 +1,19 @@
+require('ignore-styles');
+
+require('@babel/register')({
+    ignore: [ /(node_modules)/ ],
+    presets: ['@babel/preset-env', '@babel/preset-react'],
+    plugins: [
+      ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
+    ]
+});
+
+require('../server');
+
 const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
 const gmailEmail = "marketingacad.help@gmail.com";
@@ -153,3 +169,4 @@ exports.deleteUser = functions.https.onCall((uid) => {
       return { message: "Not Deleted !!! ERROR !!!" };
     });
 });
+

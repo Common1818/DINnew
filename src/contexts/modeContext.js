@@ -2,7 +2,11 @@ import React, { createContext, useReducer } from "react";
 import { modeReducer } from "../reducers/modeReducer";
 
 export const ModeContext = createContext();
-const mode = localStorage.getItem("mode");
+let mode = "light"
+if (typeof window !== 'undefined') {
+   mode = localStorage.getItem("mode");
+}
+ 
 const initState = {
   mode: mode,
 };

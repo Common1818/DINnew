@@ -11,7 +11,9 @@ const initState = {
   mode: mode,
 };
 const ModeContextProvider = (props) => {
+
   const [mode, dispatch] = useReducer(modeReducer, initState);
+
   return (
     <ModeContext.Provider value={{ mode, dispatch }}>
       {props.children}

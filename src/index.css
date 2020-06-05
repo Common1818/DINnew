@@ -2,6 +2,7 @@
 
 /* CSS Imports */
 
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 /* highlight js */
 
@@ -49,6 +50,7 @@
 /* PRRELOADER */
 
 @import "./components/Preloader/preloader.css";
+@import "./components/learn/learningCards/Preloader/preloader.css";
 
 /* REFERRAL SYSTEM */
 

@@ -7,12 +7,19 @@ const initState = {
   error: null,
 };
 
+let mode = "light"
+if (typeof window !== 'undefined') {
+   mode = localStorage.getItem("mode");
+}
+
+
 const HomeContextProvider = (props) => {
   const [home, dispatch] = useReducer(homeReducer, initState);
-  const mode = localStorage.getItem.mode;
+
   useEffect(() => {
     getHome(dispatch);
   }, []);
+
   return (
     <HomeContext.Provider value={{ home, dispatch, mode }}>
       {props.children}

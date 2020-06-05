@@ -9,12 +9,15 @@ import SignedInLinks from "./SignedInLinks";
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 // jQuery-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-import $ from "jquery";
+// import $ from "jquery";
+
 import { AuthContext } from "../../../contexts/authContext";
 import { getProfile } from "../../../crudFunctions/authFunctions";
 import { updateMode } from "../../../crudFunctions/modeFunctions";
 import { ModeContext } from "../../../contexts/modeContext";
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+import $ from 'jquery';
+
 
 const Navbar = (props) => {
   const { authData, authState, dispatch } = useContext(AuthContext);
@@ -95,8 +98,12 @@ const Navbar = (props) => {
   }, []);
 
   // Getting the current mode from local storage
-  const mode = localStorage.getItem("mode");
-  if (mode === "dark") {
+  let mode = "light"
+  if (typeof window !== 'undefined') {
+    mode = localStorage.getItem("mode");
+  }
+
+  if (mode === "dark" && typeof window !== 'undefined' ) {
     $("body").addClass("dark");
     $(".mode-icon").attr("src", "https://www.svgrepo.com/show/3158/moon.svg");
     $("#circle").css("background-color", "#111");
@@ -158,16 +165,16 @@ const Navbar = (props) => {
                   className="nav-btn"
                   as={Button}
                   variant="link"
-                  eventKey="5"
-                >
+                  eventKey="5">
+
                   <a
                     className="navbar-toggler"
                     type="button"
                     data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
-                    aria-label="Toggle navigation"
-                  >
+                    aria-label="Toggle navigation">
+
                     <span className="navbar-toggler-icon"></span>
                   </a>
                 </Accordion.Toggle>
